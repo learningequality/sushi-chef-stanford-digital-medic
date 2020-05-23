@@ -246,5 +246,7 @@ def scrape_multilanguage_slideshows(channel):
 ################################################################################
 if __name__ == '__main__':
     # This code runs when sushichef.py is called from the command line
+
+    # Use `-- --slides` to use slideshows instead of pdfs
     chef = StanfordDigitalMedicChef()
     chef.main()
