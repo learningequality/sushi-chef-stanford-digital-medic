@@ -26,7 +26,7 @@ CHANNEL_DESCRIPTION = "From the Stanford Center for " \
     "Health Education, these infographics and visual " \
     "materials provide key information on high-priority " \
     "topics related to the prevention and understanding of COVID-19."
-CHANNEL_THUMBNAIL = "https://4ao7ry48spy847yi1v2f88gj-wpengine.netdna-ssl.com/wp-content/uploads/2019/06/logo_horizontal-A_white.png"
+CHANNEL_THUMBNAIL = "https://pbs.twimg.com/profile_images/989193568752300032/UQpMU-sU_400x400.jpg"
 
 # Additional constants
 ################################################################################
@@ -162,18 +162,20 @@ def create_slideshow(images, source_id, title, language_name):
 ################################################################################
 def scrape_english_collection(channel):
     LOGGER.info('Scraping English collection...')
+    english_topic = nodes.TopicNode(source_id=ENGLISH_COLLECTION_URL, title="English")
+    channel.add_child(english_topic)
+
+
     contents = BeautifulSoup(downloader.read(ENGLISH_COLLECTION_URL), 'html5lib')
     collection_key = get_collection_key(contents)
 
     topic_selection = contents.find('div', {'class': 'asset-list'}).find('div')
     topic_list = [t for t in json.loads(topic_selection['data-react-props'])['sections'] if t['id'] not in EXCLUDED_TOPIC_IDS]
 
-    # TODO: descriptions
-
     for topic in topic_list:
         LOGGER.info('    {}'.format(topic['name'].encode('utf-8')))
         topic_node = nodes.TopicNode(source_id=topic['section_key'], title=topic['name'])
-        channel.add_child(topic_node)
+        english_topic.add_child(topic_node)
 
         # Scrape items in the topic
         url = ENGLISH_ASSETS_URL.format(collection=collection_key, section=topic['section_key'])
