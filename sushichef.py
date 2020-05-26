@@ -18,7 +18,7 @@ from PIL import Image
 
 # Run constants
 ################################################################################
-CHANNEL_NAME = "Stanford Digital Medic"                     # Name of Kolibri channel
+CHANNEL_NAME = "Stanford Digital MEdIC Coronavirus Toolkit" # Name of Kolibri channel
 CHANNEL_SOURCE_ID = "sushi-chef-stanford-digital-medic"     # Unique ID for content source
 CHANNEL_DOMAIN = "digitalmedic.stanford.edu"                # Who is providing the content
 CHANNEL_LANGUAGE = "en"                                     # Language of channel
